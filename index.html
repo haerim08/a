@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ㅁㄴㅇㄹ</title>
+</head>
+<body>
+    <!-- input은 값을 받아내는 것. text는 간단한 글을 적을 수 있음 (그대로 표시)
+    password는 뭔갈 적었을 때 비밀번호 치면 숨겨지듯이 숨겨짐
+    radio는 선택지중 하나를 선택할 때 사용 가능. <- name(같은 값)을 정해줘서 같은 radio 선택지를 만들어야지 선택지중 하나를 선택할 수 있게 해줌. -->
+    <p>아이디 : <input type="text" name="id"></p>
+    <p>이름 : <input type="text" name="name"></p>
+    <p>주소 : <input type="text" name="address"></p>
+    <p>비밀번호 : <input type="password" name="password"></p>
+    <p>성별 : 
+        <!-- value는 저장하는 값. 이 선택 박스를 선택하면 저장되는 값을 value 안에 지정해준다. -->
+        <!-- checked는 미리 선택해놓을 수 있음. 기본값이 선택되어 있는것임. -->
+        <!-- id의 내용은 밑에 있음. label은 다 가능. -->
+        <input type="radio" name="gender" value="man" checked id="man"><label for="man">남</label>
+        <input type="radio" name="gender" value="woman" id="woman"><label for="woman">여</label></p>
+    <p>좋아하는 음식은?</p>
+    <p>
+        <input type="checkbox" name="food" value="chicken"> 치킨 
+        <input type="checkbox" name="food" value="dbk">떡볶이
+        <!-- checkbox는 다중선택 가능. name을 써주면 쉽게 말해 변수 이름을 정해주어서 나중에 값을 볼 떄 쉽게 볼 수 있음  -->
+    </p>
+    <p><button>회원가입</button> <input type="button" value="취소"></p>
+    <!-- button태그는 말그대로 누를 수 있는 버튼을 만든다. button은 끝내는 명령어가 있음. /button.
+    input은 /가 없음. input으로도 버튼을 만들 수 있다. value 값으로 버튼 안에 들어갈 텍스트를 만들 수 있다. 또 , 원래 value가 하는 일도 함. -->
+    <p>태어난 년도는?</p>
+    <p>
+        <!-- select도 선택할 수 있는건데 화살표를 누르면 여러개가 뜸. 
+        그걸 선택하는 방식. select 태그를 열고 그 안에 옵션(여기도 value 값 설정할 수 있음)에 어떤 보기를 줄건지 내가 정해준다. -->
+        <select>
+            <option>2023</option>
+            <option>2022</option>
+            <option>2021</option>
+            <option selected>2020</option>
+            <!-- selected도 checekd와 같이 미리 정해놓을 수 있음. 기본값을 설정 가능. -->
+            <option>2019</option>
+        </select>
+    </p>
+    <p>여러분들의 의견을 작성해주세요!</p>
+    <p>
+        <!-- textarea는 text와 달리 문장?을 여러개 쓸 수 있음. 긴 글을 적어서 받을때? 사용됨. -->
+        <!-- 안의 내용은 textarea안에 미리 써놓은 것임. -->
+        <textarea>
+10줄이상 작성해주세요
+        </textarea>
+    </p>
+    <p>
+        <!-- label은 이름 : (label로 감싸져있는 곳)이라고 써져있는 곳을 눌렀을때 (for 안에 값을 input의 id의 값과 똑같으면)input에 마우스 커서(포커스 이동)가 가게 됨. -->
+        <label for="name">이름 : </label><input type="text" id="name" placeholder="이름을 입력하세요">
+        <!-- placeholder은 값을 적을때 힌트를 준다고 생각하면 됨. 선택해서 커서를 놓게되면 사라지는 것. ""안에 보이게하고 싶은 값을 넣어주면 됨. -->
+    </p>
+    <p>
+        <label for="age">나이 : </label><input type="text" id="age">
+    </p>
+
+    <form>
+        <!-- form은 div처럼 구역을 나눠주는거라고 생각하면 됨. 위의 내용을 작성할 때 보기 편하게? 는 모르겠는데 폼 태그를 사용한다고 함. -->
+        <!-- fieldset은 그룹을 만들어줌. 그룹화. -->
+        <!-- legend는 그 나눈(그룹화) 구역의 제목? 이름? 을 정해줌  -->
+        <fieldset>
+            <legend>필수정보입력</legend>
+            <p>
+                <label for="name0"> 이름 : </label><input type="text" placeholder="2자 이상 작성하시오" id="name0">
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>선택정보입력</legend>
+            <p>
+                취미 : <input type="text">
+            </p>
+        </fieldset>
+    </form>
+    <form>
+        <input type="email" placeholder="email을 적어주세요">
+        <!-- 이메일 형식으로 작성해야함 -->
+        <input type="color">
+        <!-- 색깔 입력 (선택) -->
+        <input type="date">
+        <!-- 날짜 입력 (선택) -->
+        <input type="tel" placeholder="전화번호를 적어주세요">
+        <!-- 전화 -->
+        <input type="search" placeholder="검색어를 적어주세요">
+        <!-- 검색하는 거. 옆의 X로 없앨 수 있음 -->
+        <button type="submit">완료</button>
+        <!-- 이건 영상에 나와있진 않지만 내가 적은 값을 완료? 입력 완료시킴.(폼 안에 넣어줘야함) -->
+        <button type="reset">리셋</button>
+    </form>
+</body>
+</html>
