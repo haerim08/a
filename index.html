@@ -1,94 +1,356 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ㅁㄴㅇㄹ</title>
+    <title>인포럼 - 컴퓨터 동아리</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            color: white;
+            padding: 100px 0 60px 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .card {
+            border-radius: 1rem;
+        }
+        .footer {
+            background: #22223b;
+            color: #fff;
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+        /* 로그인 모달 */
+        #loginModal {
+            background: rgba(0,0,0,0.5);
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #loginBox {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.1);
+            min-width: 320px;
+        }
+        #adminPanel {
+            background: #f1f5f9;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .delete-btn {
+            color: #fff;
+            background: #e53e3e;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-    <!-- input은 값을 받아내는 것. text는 간단한 글을 적을 수 있음 (그대로 표시)
-    password는 뭔갈 적었을 때 비밀번호 치면 숨겨지듯이 숨겨짐
-    radio는 선택지중 하나를 선택할 때 사용 가능. <- name(같은 값)을 정해줘서 같은 radio 선택지를 만들어야지 선택지중 하나를 선택할 수 있게 해줌. -->
-    <p>아이디 : <input type="text" name="id"></p>
-    <p>이름 : <input type="text" name="name"></p>
-    <p>주소 : <input type="text" name="address"></p>
-    <p>비밀번호 : <input type="password" name="password"></p>
-    <p>성별 : 
-        <!-- value는 저장하는 값. 이 선택 박스를 선택하면 저장되는 값을 value 안에 지정해준다. -->
-        <!-- checked는 미리 선택해놓을 수 있음. 기본값이 선택되어 있는것임. -->
-        <!-- id의 내용은 밑에 있음. label은 다 가능. -->
-        <input type="radio" name="gender" value="man" checked id="man"><label for="man">남</label>
-        <input type="radio" name="gender" value="woman" id="woman"><label for="woman">여</label></p>
-    <p>좋아하는 음식은?</p>
-    <p>
-        <input type="checkbox" name="food" value="chicken"> 치킨 
-        <input type="checkbox" name="food" value="dbk">떡볶이
-        <!-- checkbox는 다중선택 가능. name을 써주면 쉽게 말해 변수 이름을 정해주어서 나중에 값을 볼 떄 쉽게 볼 수 있음  -->
-    </p>
-    <p><button>회원가입</button> <input type="button" value="취소"></p>
-    <!-- button태그는 말그대로 누를 수 있는 버튼을 만든다. button은 끝내는 명령어가 있음. /button.
-    input은 /가 없음. input으로도 버튼을 만들 수 있다. value 값으로 버튼 안에 들어갈 텍스트를 만들 수 있다. 또 , 원래 value가 하는 일도 함. -->
-    <p>태어난 년도는?</p>
-    <p>
-        <!-- select도 선택할 수 있는건데 화살표를 누르면 여러개가 뜸. 
-        그걸 선택하는 방식. select 태그를 열고 그 안에 옵션(여기도 value 값 설정할 수 있음)에 어떤 보기를 줄건지 내가 정해준다. -->
-        <select>
-            <option>2023</option>
-            <option>2022</option>
-            <option>2021</option>
-            <option selected>2020</option>
-            <!-- selected도 checekd와 같이 미리 정해놓을 수 있음. 기본값을 설정 가능. -->
-            <option>2019</option>
-        </select>
-    </p>
-    <p>여러분들의 의견을 작성해주세요!</p>
-    <p>
-        <!-- textarea는 text와 달리 문장?을 여러개 쓸 수 있음. 긴 글을 적어서 받을때? 사용됨. -->
-        <!-- 안의 내용은 textarea안에 미리 써놓은 것임. -->
-        <textarea>
-10줄이상 작성해주세요
-        </textarea>
-    </p>
-    <p>
-        <!-- label은 이름 : (label로 감싸져있는 곳)이라고 써져있는 곳을 눌렀을때 (for 안에 값을 input의 id의 값과 똑같으면)input에 마우스 커서(포커스 이동)가 가게 됨. -->
-        <label for="name">이름 : </label><input type="text" id="name" placeholder="이름을 입력하세요">
-        <!-- placeholder은 값을 적을때 힌트를 준다고 생각하면 됨. 선택해서 커서를 놓게되면 사라지는 것. ""안에 보이게하고 싶은 값을 넣어주면 됨. -->
-    </p>
-    <p>
-        <label for="age">나이 : </label><input type="text" id="age">
-    </p>
+    <!-- 로그인 모달 -->
+    <div id="loginModal">
+        <div id="loginBox">
+            <h3 class="mb-3">인포럼 동아리 로그인</h3>
+            <div class="mb-3">
+                <label for="loginId" class="form-label">아이디</label>
+                <input type="text" class="form-control" id="loginId" placeholder="아이디를 입력하세요">
+            </div>
+            <div class="mb-3">
+                <label for="loginPw" class="form-label">비밀번호</label>
+                <input type="password" class="form-control" id="loginPw" placeholder="비밀번호를 입력하세요">
+            </div>
+            <button class="btn btn-primary w-100" onclick="login()">로그인</button>
+            <div id="loginMsg" class="text-danger mt-2" style="display:none;"></div>
+            <div class="mt-3 text-muted" style="font-size:0.95rem;">
+                <b>관리자</b>로 로그인하려면<br>
+                아이디: <code>rhksflwk</code> / 비밀번호: <code>rhksflwk</code>
+            </div>
+        </div>
+    </div>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">인포럼</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#about">동아리 소개</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#activity">주요 활동</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#members">동아리원</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">커뮤니티</a></li>
+                </ul>
+                <span id="userRole" class="badge bg-warning text-dark ms-3" style="display:none;"></span>
+                <button id="logoutBtn" class="btn btn-outline-light ms-2" style="display:none;" onclick="logout()">로그아웃</button>
+            </div>
+        </div>
+    </nav>
 
-    <form>
-        <!-- form은 div처럼 구역을 나눠주는거라고 생각하면 됨. 위의 내용을 작성할 때 보기 편하게? 는 모르겠는데 폼 태그를 사용한다고 함. -->
-        <!-- fieldset은 그룹을 만들어줌. 그룹화. -->
-        <!-- legend는 그 나눈(그룹화) 구역의 제목? 이름? 을 정해줌  -->
-        <fieldset>
-            <legend>필수정보입력</legend>
-            <p>
-                <label for="name0"> 이름 : </label><input type="text" placeholder="2자 이상 작성하시오" id="name0">
+    <!-- 히어로 섹션 -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">컴퓨터 동아리 <span style="color:#90cdf4;">인포럼</span></h1>
+            <p class="lead mt-4">C#, Unity, Python을 배우며 함께 성장하는 IT 커뮤니티<br>
+            <span class="badge bg-light text-dark mt-3">활동장소: SW2실</span>
             </p>
-        </fieldset>
-        <fieldset>
-            <legend>선택정보입력</legend>
-            <p>
-                취미 : <input type="text">
-            </p>
-        </fieldset>
-    </form>
-    <form>
-        <input type="email" placeholder="email을 적어주세요">
-        <!-- 이메일 형식으로 작성해야함 -->
-        <input type="color">
-        <!-- 색깔 입력 (선택) -->
-        <input type="date">
-        <!-- 날짜 입력 (선택) -->
-        <input type="tel" placeholder="전화번호를 적어주세요">
-        <!-- 전화 -->
-        <input type="search" placeholder="검색어를 적어주세요">
-        <!-- 검색하는 거. 옆의 X로 없앨 수 있음 -->
-        <button type="submit">완료</button>
-        <!-- 이건 영상에 나와있진 않지만 내가 적은 값을 완료? 입력 완료시킴.(폼 안에 넣어줘야함) -->
-        <button type="reset">리셋</button>
-    </form>
+            <a href="#contact" class="btn btn-warning btn-lg mt-4">가입 문의하기</a>
+        </div>
+    </section>
+
+    <!-- 동아리 소개 -->
+    <section id="about" class="container">
+        <h2 class="section-title">동아리 소개</h2>
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <p>
+                    <strong>인포럼</strong>은 컴퓨터와 소프트웨어에 관심 있는 학생들이 모여 함께 배우고 성장하는 컴퓨터 동아리입니다.<br>
+                    최신 IT 트렌드와 프로그래밍 언어(C#, Unity, Python 등)를 중심으로 다양한 프로젝트와 스터디를 진행하며, 
+                    실전 코딩 역량과 협업 능력을 키우고 있습니다.<br>
+                    <br>
+                    <strong>누구나 환영합니다!</strong> 초보부터 고수까지, 함께 배우고 도전하며 미래의 개발자로 성장할 여러분을 기다립니다.
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img src="https://cdn.pixabay.com/photo/2017/01/10/19/05/computer-1963032_1280.jpg" class="img-fluid rounded shadow" alt="동아리 이미지">
+            </div>
+        </div>
+    </section>
+
+    <!-- 주요 활동 -->
+    <section id="activity" class="container">
+        <h2 class="section-title">주요 활동</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">프로그래밍 스터디</h5>
+                        <p class="card-text">C#, Unity, Python 등 다양한 언어와 툴을 함께 공부하고 실습합니다. 동아리원끼리 코드 리뷰와 피드백을 주고받으며 실력을 쌓아갑니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">팀 프로젝트</h5>
+                        <p class="card-text">게임 개발, 앱 제작, 웹사이트 구축 등 실전 프로젝트를 통해 협업과 문제 해결 능력을 키웁니다. 완성된 작품은 교내외 행사에 전시합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">정기 세미나 & 특강</h5>
+                        <p class="card-text">IT 업계 전문가 초청 특강, 최신 기술 세미나, 진로 탐색 등 다양한 프로그램을 운영합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 동아리원/부장 소개 -->
+    <section id="members" class="container">
+        <h2 class="section-title">동아리원 & 부장 소개</h2>
+        <div class="row align-items-center">
+            <div class="col-md-3 text-center">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle shadow" width="120" alt="부장">
+                <h5 class="mt-3">유승민 <span class="badge bg-primary">부장</span></h5>
+                <p class="text-muted">SW2실에서 만나요!</p>
+            </div>
+            <div class="col-md-9">
+                <ul>
+                    <li>다양한 학년과 전공의 동아리원들이 함께 활동</li>
+                    <li>친목 도모, 멘토링, 자유 프로젝트 등 활발한 교류</li>
+                    <li>신입 회원 상시 모집 중!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 커뮤니티/문의 -->
+    <section id="contact" class="container">
+        <h2 class="section-title">커뮤니티 & 문의</h2>
+        <p>
+            동아리원 전용 커뮤니티(디스코드/카카오톡 오픈채팅/구글 클래스룸 등)를 운영 중입니다.<br>
+            문의 및 가입 희망자는 아래 연락처 또는 동아리방(SW2실)로 찾아오세요!
+        </p>
+        <div class="row">
+            <div class="col-md-6">
+                <ul>
+                    <li>이메일: <a href="mailto:inforum@school.ac.kr">inforum@school.ac.kr</a></li>
+                    <li>카카오톡 오픈채팅: <a href="#">바로가기</a></li>
+                    <li>동아리방: SW2실</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <form id="inquiryForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">이름</label>
+                        <input type="text" class="form-control" id="name" placeholder="이름을 입력하세요" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">문의 내용</label>
+                        <textarea class="form-control" id="message" rows="3" placeholder="문의하실 내용을 입력하세요" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">문의 보내기</button>
+                </form>
+                <div id="inquiryMsg" class="mt-2 text-success" style="display:none;">문의가 접수되었습니다!</div>
+            </div>
+        </div>
+        <!-- 관리자 패널: 문의 내역 -->
+        <div id="adminPanel" style="display:none;">
+            <h4 class="mb-3">실시간 문의 내역 <span class="badge bg-danger">관리자 전용</span></h4>
+            <div id="inquiryList" class="table-responsive">
+                <!-- 문의 리스트가 여기에 표시됨 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer text-center">
+        <div class="container">
+            <div>© 2025 인포럼 | 컴퓨터 동아리 | SW2실</div>
+            <div>Designed by Inforum Web Team</div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 로그인 관련 변수
+        let isAdmin = false;
+        let isLogin = false;
+
+        // 문의 데이터 저장 (새로고침 시 사라짐)
+        let inquiries = [];
+
+        // 로그인 함수
+        function login() {
+            const id = document.getElementById('loginId').value.trim();
+            const pw = document.getElementById('loginPw').value.trim();
+            const loginMsg = document.getElementById('loginMsg');
+            if (id === '' || pw === '') {
+                loginMsg.innerText = "아이디와 비밀번호를 입력하세요.";
+                loginMsg.style.display = "block";
+                return;
+            }
+            if (id === "rhksflwk" && pw === "rhksflwk") {
+                isAdmin = true;
+                isLogin = true;
+                document.getElementById('userRole').innerText = "관리자";
+                document.getElementById('userRole').style.display = "inline-block";
+                document.getElementById('logoutBtn').style.display = "inline-block";
+                document.getElementById('loginModal').style.display = "none";
+                showAdminPanel();
+            } else {
+                isAdmin = false;
+                isLogin = true;
+                document.getElementById('userRole').innerText = "일반 회원";
+                document.getElementById('userRole').style.display = "inline-block";
+                document.getElementById('logoutBtn').style.display = "inline-block";
+                document.getElementById('loginModal').style.display = "none";
+                hideAdminPanel();
+            }
+        }
+
+        // 로그아웃 함수
+        function logout() {
+            isAdmin = false;
+            isLogin = false;
+            document.getElementById('loginModal').style.display = "flex";
+            document.getElementById('userRole').style.display = "none";
+            document.getElementById('logoutBtn').style.display = "none";
+            hideAdminPanel();
+        }
+
+        // 문의 폼 제출
+        document.getElementById('inquiryForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const message = document.getElementById('message').value.trim();
+            if (name === "" || message === "") return;
+            const now = new Date();
+            const timeStr = now.toLocaleString("ko-KR", { hour12: false });
+            inquiries.push({ name, message, time: timeStr });
+            document.getElementById('inquiryMsg').style.display = "block";
+            setTimeout(()=>{ document.getElementById('inquiryMsg').style.display = "none"; }, 2000);
+            document.getElementById('inquiryForm').reset();
+            if (isAdmin) showAdminPanel();
+        });
+
+        // 관리자 패널 표시
+        function showAdminPanel() {
+            document.getElementById('adminPanel').style.display = "block";
+            renderInquiries();
+        }
+        // 관리자 패널 숨김
+        function hideAdminPanel() {
+            document.getElementById('adminPanel').style.display = "none";
+        }
+        // 문의 내역 렌더링
+        function renderInquiries() {
+            const listDiv = document.getElementById('inquiryList');
+            if (inquiries.length === 0) {
+                listDiv.innerHTML = "<div class='text-muted'>아직 문의가 없습니다.</div>";
+                return;
+            }
+            let html = `<table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>시간</th>
+                        <th>이름</th>
+                        <th>문의 내용</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            inquiries.slice().reverse().forEach((inq, idx) => {
+                html += `<tr>
+                    <td>${inq.time}</td>
+                    <td>${inq.name}</td>
+                    <td>${inq.message}</td>
+                    <td><button class="delete-btn" onclick="deleteInquiry(${inquiries.length-1-idx})">삭제</button></td>
+                </tr>`;
+            });
+            html += "</tbody></table>";
+            listDiv.innerHTML = html;
+        }
+        // 문의 삭제 (관리자만)
+        function deleteInquiry(idx) {
+            if (!isAdmin) return;
+            if (confirm("정말 삭제하시겠습니까?")) {
+                inquiries.splice(idx, 1);
+                renderInquiries();
+            }
+        }
+        // 로그인 상태에서 새로고침 방지
+        window.onload = function() {
+            document.getElementById('loginModal').style.display = "flex";
+        }
+    </script>
 </body>
 </html>
